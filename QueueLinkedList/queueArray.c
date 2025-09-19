@@ -74,7 +74,6 @@ void read(Queue A){
     temp = front(A);
     dequeue(&A);
     printf("elem: %c\n", temp);
-  }
-  
+  } 
 }
 

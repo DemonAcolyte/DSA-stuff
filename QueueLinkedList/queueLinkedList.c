@@ -23,17 +23,21 @@ void dequeue(Queue *A);
 char top(Queue A);
 void read(Queue A);
 int size(Queue A);
+void insertSorted(Queue *A, char x);
 
 int main(){
 
   Queue L;
 
   initQueue(&L);
-  enqueue(&L, 'd');
+  enqueue(&L, 'a');
   enqueue(&L, 'b');
-  enqueue(&L, 'c');
+  enqueue(&L, 'z');
 
   //printf("rear: %c", L.rear->elem);
+  insertSorted(&L, 'c');
+  insertSorted(&L, 'c');
+  insertSorted(&L, 'd');
   read(L);
   
 }
@@ -114,4 +118,24 @@ int size(Queue A){
   }
   
   return ctr;
+}
+
+void insertSorted(Queue *A, char x){
+  int numElem = size(*A);
+  int ctr;
+
+  bool retval = false;
+  for(ctr = 0; ctr < numElem; ctr++){
+    char temp = front(*A);
+
+    if(x < temp && retval == false){
+    enqueue(A, x);
+    retval = true;
+    }
+    dequeue(A);
+    enqueue(A, temp);
+  }
+  if(retval == false){
+    enqueue(A, x);
+  }
 }
